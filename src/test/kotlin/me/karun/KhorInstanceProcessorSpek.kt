@@ -11,7 +11,7 @@ import org.jetbrains.spek.api.dsl.on
 object KhorInstanceProcessorSpek : Spek({
 
   given("A CLI implementation using Khor") {
-    val cli: Khor = MyCLI()
+    val cli: Khor = Say()
 
     on("being processed") {
 

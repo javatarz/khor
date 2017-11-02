@@ -16,5 +16,3 @@ internal class KhorInstanceProcessor {
     }
   }
 }
-
-internal data class HelpTextItem(private val methodName: String, private val description: String)
