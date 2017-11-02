@@ -1,4 +1,4 @@
-package me.karun
+package me.karun.khor
 
 fun main(args: Array<String>) {
   val processor = KhorProcessor(Say::class, Poke::class)

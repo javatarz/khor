@@ -1,4 +1,4 @@
-package me.karun
+package me.karun.khor
 
 internal class KhorInstanceProcessor {
   companion object {

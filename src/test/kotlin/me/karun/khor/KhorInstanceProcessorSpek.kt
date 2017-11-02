@@ -1,4 +1,4 @@
-package me.karun
+package me.karun.khor
 
 import org.amshove.kluent.`should be`
 import org.amshove.kluent.`should contain all`

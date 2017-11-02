@@ -1,6 +1,6 @@
-package me.karun
+package me.karun.khor
 
-import me.karun.PrintSeparator.*
+import me.karun.khor.PrintSeparator.*
 
 internal class HelpTextItems(private val items: List<HelpTextItem>) {
   fun evaluatePrintableString(): String = printableItems().joinToString(separator = "\n") {

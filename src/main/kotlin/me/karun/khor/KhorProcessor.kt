@@ -1,4 +1,4 @@
-package me.karun
+package me.karun.khor
 
 import kotlin.reflect.KClass
 

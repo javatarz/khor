@@ -1,4 +1,4 @@
-package me.karun
+package me.karun.khor
 
 internal data class HelpTextItem(internal val methodName: String,
                                  internal val description: String = "") : TextItem {
