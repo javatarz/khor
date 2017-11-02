@@ -3,7 +3,6 @@ package me.karun
 fun main(args: Array<String>) {
   val processor = KhorProcessor(Say::class, Poke::class)
 
-  println("Method count: ${processor.methods()}")
   println(processor.helpText())
 }
 

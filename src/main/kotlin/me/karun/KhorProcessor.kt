@@ -3,10 +3,7 @@ package me.karun
 import kotlin.reflect.KClass
 
 class KhorProcessor(private vararg val khors: KClass<out Khor>) {
-  fun methods(): Int = khors.map { it.java }
-    .map { KhorInstanceProcessor.methods(it) }
-    .sum()
-
+  // TODO: Refactor method to make it smaller
   fun helpText(): String {
     val helpItems = helpItems()
 
@@ -30,11 +27,11 @@ class KhorProcessor(private vararg val khors: KClass<out Khor>) {
 
   private fun helpItems(): List<HelpTextItem> {
     return khors.map { it.java }
-      .map { xform(it.simpleName.toLowerCase(), KhorInstanceProcessor.helpText(it)) }
+      .map { combine(it.simpleName.toLowerCase(), KhorInstanceProcessor.helpText(it)) }
       .flatten()
   }
 
-  private fun xform(taskName: String, items: Iterable<HelpTextItem>): List<HelpTextItem> =
+  private fun combine(taskName: String, items: Iterable<HelpTextItem>): List<HelpTextItem> =
     items.map { HelpTextItem(methodName = taskName + " " + it.methodName, description = it.description) }
       .toList()
 }
