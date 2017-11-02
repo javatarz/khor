@@ -8,16 +8,15 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 
-object KhorTest : Spek({
+object KhorInstanceProcessorSpek : Spek({
 
   given("A CLI implementation using Khor") {
     val cli: Khor = MyCLI()
 
     on("being processed") {
-      val processor = KhorInstanceProcessor()
 
       it("can count the number of methods") {
-        processor.methods(cli.javaClass) shouldBe 2
+        KhorInstanceProcessor.methods(cli.javaClass) shouldBe 2
       }
 
       it("provide a readable description of the methods") {
@@ -25,7 +24,7 @@ object KhorTest : Spek({
           HelpTextItem("hello", "say hello to NAME"),
           HelpTextItem("goodbye", "say goodbye to NAME")
         )
-        val actual = processor.helpText(cli.javaClass)
+        val actual = KhorInstanceProcessor.helpText(cli.javaClass)
 
         actual.count() `should be` expected.count()
         actual `should contain all` expected
