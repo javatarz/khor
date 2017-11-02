@@ -14,10 +14,10 @@ object KhorTest : Spek({
     val cli: Khor = MyCLI()
 
     on("being processed") {
-      val processor = KhorProcessor()
+      val processor = KhorInstanceProcessor()
 
       it("can count the number of methods") {
-        processor.methods(cli) shouldBe 2
+        processor.methods(cli.javaClass) shouldBe 2
       }
 
       it("provide a readable description of the methods") {
@@ -25,7 +25,7 @@ object KhorTest : Spek({
           HelpTextItem("hello", "say hello to NAME"),
           HelpTextItem("goodbye", "say goodbye to NAME")
         )
-        val actual = processor.helpText(cli)
+        val actual = processor.helpText(cli.javaClass)
 
         actual.count() `should be` expected.count()
         actual `should contain all` expected
