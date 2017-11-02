@@ -1,36 +1,38 @@
 package me.karun
 
-internal open class HelpTextItem(internal val methodName: String,
-                                 internal val description: String = "") {
-  open fun printableText(maxMethodNameLength: Int, maxDescriptionLength: Int): String =
-    "│ ${padString(methodName, maxMethodNameLength)} │ ${padString(description, maxDescriptionLength)} │"
+internal data class HelpTextItem(internal val methodName: String,
+                                 internal val description: String = "") : TextItem {
+  override fun printableText(methodLengths: PrintPadding): String =
+    "│ ${padString(methodName, methodLengths.methodNameLength)} │ ${padString(description, methodLengths.descriptionLength)} │"
 
-  operator fun plus(list: List<HelpTextItem>): List<HelpTextItem> {
+  private fun padString(s: String, lengthWithPadding: Int): String = s + " ".repeat(lengthWithPadding - s.length)
+
+  internal operator fun plus(list: List<HelpTextItem>): List<HelpTextItem> {
     val mList = list.toMutableList()
     mList.add(0, this)
 
     return mList.toList()
   }
 
-  operator fun plus(theOther: HelpTextItem): List<HelpTextItem> = listOf(this, theOther)
-
-  private fun padString(s: String, lengthWithPadding: Int): String = s + " ".repeat(lengthWithPadding - s.length)
-
   companion object {
     val header = HelpTextItem("Command", "Description")
   }
 }
 
-internal class SeparatorHelpTextItem(private val methodNameLength: Int,
-                                     private val descriptionLength: Int,
-                                     private val type: PrintSeparator) : HelpTextItem("") {
-  override fun printableText(maxMethodNameLength: Int, maxDescriptionLength: Int): String {
+internal class SeparatorHelpTextItem(private val type: PrintSeparator) : TextItem {
+  override fun printableText(methodLengths: PrintPadding): String {
     return type.start +
-      "─".repeat(methodNameLength) +
+      "─".repeat(methodLengths.methodNameLength) +
       type.middle +
-      "─".repeat(descriptionLength) +
+      "─".repeat(methodLengths.descriptionLength) +
       type.end
   }
+}
+
+internal interface TextItem {
+  fun printableText(methodLengths: PrintPadding): String
+
+  operator fun plus(theOther: TextItem): List<TextItem> = listOf(this, theOther)
 }
 
 internal enum class PrintSeparator(val start: String, val middle: String, val end: String) {

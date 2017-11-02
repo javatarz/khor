@@ -10,7 +10,7 @@ import org.jetbrains.spek.api.dsl.on
 object KhorInstanceProcessorSpek : Spek({
 
   given("A CLI implementation using Khor") {
-    val khor: Khor = TestCLI()
+    val khor = TestCLI()
 
     on("being processed") {
 
